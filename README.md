@@ -1,6 +1,7 @@
-# Kiosk Dashboard (Raspberry Pi)
+# Kiosk Dashboard
 
 A **web-based dashboard** designed to run in **kiosk mode** on a **Raspberry Pi** (tested on RPi 3), at **Full HD resolution (1920×1080)**.
+It will also work on any browser, any OS.
 
 No backend, no accounts, no API keys.  
 Built entirely with **HTML, CSS, and vanilla JavaScript**, using **public embeds**.
