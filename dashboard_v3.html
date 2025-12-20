@@ -145,6 +145,7 @@ iframe {
   <button onclick="showPage('weather')" id="btn-weather" class="active">Tempo</button>
   <button onclick="showPage('markets')" id="btn-markets">Mercados</button>
   <button onclick="showPage('news')" id="btn-news">Notícias</button>
+  <button onclick="showPage('settings')" id="btn-settings">Settings</button>
 
   <div id="clock"></div>
 
@@ -217,6 +218,27 @@ iframe {
   </div>
 </div>
 
+<!-- PÁGINA 4 — SETTINGS -->
+<div id="settings" class="page">
+  <div style="padding:20px; max-width:420px;">
+    <h2>Settings</h2>
+
+    <h3>Weather (Windy)</h3>
+    <label>Latitude</label><br>
+    <input id="lat" type="number" step="0.0001"><br><br>
+
+    <label>Longitude</label><br>
+    <input id="lon" type="number" step="0.0001"><br><br>
+
+    <h3>Clock</h3>
+    <label>Timezone</label><br>
+    <input id="timezone" type="text" placeholder="Europe/Lisbon"><br><br>
+
+    <button onclick="saveSettings()">Save</button>
+  </div>
+</div>
+
+
 
 <script>
 function showPage(id) {
@@ -241,21 +263,82 @@ function setCrypto(symbol) {
 }
 
 function updateClock() {
+  const { timezone } = loadSettings();
   const now = new Date();
-  const time = now.toLocaleTimeString('pt-PT', {
+
+  const time = now.toLocaleTimeString('en-GB', {
     hour: '2-digit',
     minute: '2-digit',
+    second: '2-digit',
+    timeZone: timezone
   });
+
   const date = now.toLocaleDateString('en-GB', {
     weekday: 'short',
     day: '2-digit',
-    month: 'short'
+    month: 'short',
+    timeZone: timezone
   });
+
   document.getElementById('clock').textContent = `${date} · ${time}`;
 }
 
+
 updateClock();
 setInterval(updateClock, 1000);
+
+
+function updateWindy(lat, lon) {
+  const iframe = document.querySelector('#weather iframe');
+
+  iframe.src =
+    `https://embed.windy.com/embed2.html` +
+    `?lat=${lat}` +
+    `&lon=${lon}` +
+    `&zoom=7` +
+    `&overlay=rain` +
+    `&product=ecmwf` +
+    `&metricTemp=%C2%B0C`;
+}
+
+
+
+const DEFAULTS = {
+  lat: 38.7223,
+  lon: -9.1393,
+  timezone: 'Europe/Lisbon'
+};
+
+function loadSettings() {
+  return {
+    lat: localStorage.getItem('lat') || DEFAULTS.lat,
+    lon: localStorage.getItem('lon') || DEFAULTS.lon,
+    timezone: localStorage.getItem('timezone') || DEFAULTS.timezone
+  };
+}
+
+function saveSettings() {
+  localStorage.setItem('lat', document.getElementById('lat').value);
+  localStorage.setItem('lon', document.getElementById('lon').value);
+  localStorage.setItem('timezone', document.getElementById('timezone').value);
+  applySettings();
+  alert('Saved');
+}
+
+
+function applySettings() {
+  const s = loadSettings();
+
+  updateWindy(s.lat, s.lon);
+
+  document.getElementById('lat').value = s.lat;
+  document.getElementById('lon').value = s.lon;
+  document.getElementById('timezone').value = s.timezone;
+}
+
+applySettings();
+setInterval(updateClock, 1000);
+
 </script>
 
 </body>

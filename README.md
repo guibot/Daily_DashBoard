@@ -1,4 +1,4 @@
-# Kiosk Dashboard
+# Kiosk Weather Markets Daily-News Dashboard
 
 A **web-based dashboard** designed to run in **kiosk mode** on a **Raspberry Pi** (tested on RPi 3), at **Full HD resolution (1920×1080)**.
 
@@ -76,7 +76,7 @@ chromium \
   --password-store=basic \
   --use-mock-keychain \
   --force-device-scale-factor=1.2 \
-  file:///home/dash/dashboard_v2.html
+  file:///home/$HOME/dashboard.html
 
 ---
 
