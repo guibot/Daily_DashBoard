@@ -104,27 +104,6 @@ iframe {
   gap: 0;
 }
 
-.tech1 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  height: 100%;
-  gap: 0;
-}
-
-.tech2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  height: 100%;
-  gap: 0;
-}
-
-.tech3 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  height: 100%;
-  gap: 0;
-}
-
 .newsPanel{
   background: #000;
   color: #fff;
@@ -165,9 +144,6 @@ iframe {
 <nav>
   <button onclick="showPage('weather')" id="btn-weather" class="active">Tempo</button>
   <button onclick="showPage('markets')" id="btn-markets">Mercados</button>
-  <button onclick="showPage('tech1')" id="btn-tech1">Tecnologia_1</button>
-  <button onclick="showPage('tech2')" id="btn-tech2">Tecnologia_2</button>
-  <button onclick="showPage('tech3')" id="btn-tech2">Tecnologia_3</button>
   <button onclick="showPage('news')" id="btn-news">Notícias</button>
   <button onclick="showPage('settings')" id="btn-settings">Settings</button>
 
@@ -225,78 +201,19 @@ iframe {
   </div>
 </div>
 
-<!-- PÁGINA 3 — TECNOLOGIA -->
-<div id="tech1" class="page">
-  <div class="tech1">
-
-    <!-- CDM -->
-    <div class="newsPanel">
-      <h3>Create Digital Music</h3>
-      <script src="https://rss.bloople.net/?url=https%3A%2F%2Ffeeds.feedburner.com%2Fcreatedigitalmusic&limit=20&detail=200&type=js"></script>
-    </div>
-
-
-    <!-- WIRED -->
-    <div class="newsPanel">
-      <h3>Wired</h3>
-      <script src="https://rss.bloople.net/?url=https%3A%2F%2Fwww.wired.com%2Ffeed%2Fcategory%2Fsecurity%2Flatest%2Frss&limit=20&detail=200&type=js"></script>
-    </div>
-
-  </div>
-</div>
-
-<!-- PÁGINA 4 — TECNOLOGIA -->
-<div id="tech2" class="page">
-  <div class="tech2">
-
-    <!-- Engadget -->
-    <div class="newsPanel">
-      <h3>Engadget</h3>
-      <script src="https://rss.bloople.net/?url=https%3A%2F%2Fwww.engadget.com%2Frss.xml&limit=20&detail=200&type=js"></script>
-    </div>
-
-
-    <!-- Ars Technica -->
-    <div class="newsPanel">
-      <h3>Ars Technica</h3>
-      <script src="https://rss.bloople.net/?url=https%3A%2F%2Ffeeds.arstechnica.com%2Farstechnica%2Findex&limit=20&detail=200&type=js"></script>
-    </div>
-
-  </div>
-</div>
-
-<!-- PÁGINA 5 — NOTÍCIAS -->
-<div id="tech3" class="page">
-  <div class="tech3">
-
-    <!-- Sapo Tek -->
-    <div class="newsPanel">
-      <h3>Sapo Tek</h3>
-      <script src="https://rss.bloople.net/?url=https%3A%2F%2Ftek.sapo.pt%2Frss&limit=20&detail=200&type=js"></script>
-    </div>
-
-    <div class="newsPanel">
-      <h3>MIT</h3>
-      <script src="https://rss.bloople.net/?url=https%3A%2F%2Fwww.technologyreview.com%2Ffeed%2F&limit=20&detail=200&type=js"></script>
-  </div>
-
-  </div>
-</div>
-
-<!-- PÁGINA 6 — NOTÍCIAS -->
+<!-- PÁGINA 3 — NOTÍCIAS -->
 <div id="news" class="page">
   <div class="news">
 
-    <!-- BBC -->
+    <!-- INTERNACIONAL (BBC) -->
     <div class="newsPanel">
-      <h3>BBC</h3>
       <script src="https://rss.bloople.net/?url=https%3A%2F%2Ffeeds.bbci.co.uk%2Fnews%2Fworld%2Frss.xml&limit=20&detail=200&type=js"></script>
     </div>
 
+    <!-- NACIONAL (Expresso) -->
     <div class="newsPanel">
-      <h3>RTP</h3>
-      <script src="https://rss.bloople.net/?url=https%3A%2F%2Fwww.rtp.pt%2Fnoticias%2Frss&limit=20&detail=200&type=js"></script>
-  </div>
+      <script src="https://rss.bloople.net/?url=https%3A%2F%2Ffeeds.feedburner.com%2Fexpresso-geral&limit=20&detail=200&type=js"></script>
+    </div>
 
   </div>
 </div>

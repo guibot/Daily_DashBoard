@@ -16,6 +16,10 @@ const int custom_btpin = 18;
 int rawx, rawy, x, y;
 int threshold = 10;  // dead zone
 
+int mouseX = 0;
+int mouseY = 0;
+bool isMoving = false;
+
 int joybt, mouse_left, scrolldown, scrollup, custom;
 
 int close;
@@ -32,6 +36,20 @@ void setup() {
   pinMode(scrollup_btpin, INPUT_PULLUP);
 
   Mouse.begin();
+
+  delay(2000);
+
+  if (digitalRead(mouse_left_btpin) == HIGH)
+    wait(2, 20);  // wait 2 minutes, 20 seconds (140000 ms)
+
+  delay(1000);
+  moveToCorner();            // move mouse to (0, 0)
+  delay(1000);
+  mouseMoveTo(218, 142);     // move to relative pos
+  delay(500);
+  Mouse.press(MOUSE_LEFT);
+  delay(100);
+  Mouse.release(MOUSE_LEFT);
 }
 
 void loop() {
@@ -60,38 +78,6 @@ void loop() {
   y = y / 250;
 
   Mouse.move(x, y);  // (x, y)
-
-
-  /*if (custom == HIGH) {
-  }
-  else {
-    y = rawy - 512;
-
-    if (y > threshold) {
-      // Joystick para baixo → Ctrl -
-      Keyboard.press(KEY_LEFT_CTRL);
-      Keyboard.press(KEYPAD_MINUS);  
-      delay(10);
-      Keyboard.releaseAll();
-      Serial.println("CTRL -");
-      delay(300); 
-
-    } else if (y < -threshold) {
-      // Joystick para cima → Ctrl +
-      Keyboard.press(KEY_LEFT_CTRL);
-      Keyboard.press(KEYPAD_PLUS);  
-      delay(10);
-      Keyboard.releaseAll();
-      Serial.println("CTRL +");
-      delay(300);  
-    }
-  }*/
-
-  //Serial.printf("rx: %d | ry: %d || x: %d | y: %d", rawx, rawy, x, y);
-  //Serial.printf(" joybt: %d | ml: %d || cl: %d | scrolldown: %d | scrollup: %d\n", joybt, mouse_left, close, scrolldown, scrollup);
-
-  /**/
-
 
   // bts
   if (digitalRead(mouse_left_btpin) == LOW) Mouse.press(MOUSE_LEFT);
@@ -127,4 +113,40 @@ void loop() {
   /**/
 
   delay(10);
+}
+
+
+
+void moveToCorner() {
+  for (int i = 0; i < 100; i++) {
+    Mouse.move(-127, -127);
+    delay(10);
+  }
+  mouseX = 0;
+  mouseY = 0;
+}
+
+
+void mouseMoveTo(int targetX, int targetY) {
+  int dx = targetX - mouseX;
+  int dy = targetY - mouseY;
+
+  while (dx != 0 || dy != 0) {
+    int stepX = constrain(dx, -127, 127);
+    int stepY = constrain(dy, -127, 127);
+
+    Mouse.move(stepX, stepY);
+    mouseX += stepX;
+    mouseY += stepY;
+
+    dx = targetX - mouseX;
+    dy = targetY - mouseY;
+
+    delay(5);
+  }
+}
+
+void wait(int minutes, int seconds) {
+  unsigned long totalMs = (minutes * 60UL + seconds) * 1000UL;
+  delay(totalMs);
 }
