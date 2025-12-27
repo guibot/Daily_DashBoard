@@ -184,6 +184,32 @@ iframe {
   white-space: nowrap;
 }
 
+#signature {
+  position: fixed;
+  bottom: 8px;
+  right: 12px;
+  font-size: 11px;
+  letter-spacing: 0.3px;
+  padding: 6px 10px;
+  background: rgba(15, 19, 26, 0.75);
+  backdrop-filter: blur(6px);
+  border-radius: 6px;
+  z-index: 9999;
+}
+
+#signature a {
+  color: #e6e6e6;
+  text-decoration: none;
+  opacity: 0.85;
+}
+
+#signature a:hover {
+  text-decoration: underline;
+  opacity: 1;
+}
+
+
+
 
 @media (max-width: 768px) {
 
@@ -606,6 +632,11 @@ applySettings();
 setInterval(updateClock, 1000);
 
 </script>
+
+<div id="signature">
+  Daily Dashboard 2025 · by <a href="http://guilhermemartins.net" target="_blank" rel="noopener"> Guilherme Martins </a>
+</div>
+
 
 </body>
 </html>
