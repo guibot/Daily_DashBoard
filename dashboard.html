@@ -20,9 +20,12 @@ nav {
   display: flex;
   align-items: center;
   gap: 16px;
-  padding: 0 20px;
   background: #0f131a;
   border-bottom: 1px solid #1b2230;
+
+  padding-left: 16px;
+  padding-right: 8px;
+
 }
 nav button {
   background: none;
@@ -125,7 +128,14 @@ iframe {
 }
 
 /* NOTÍCIAS (agora em JS, dá para estilizar) */
-.news {
+.news1 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 100%;
+  gap: 0;
+}
+
+.news2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
   height: 100%;
@@ -184,28 +194,40 @@ iframe {
   white-space: nowrap;
 }
 
+
+#clock-container {
+  margin-left: auto;        /* empurra para a direita */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  justify-content: center;
+  /* compensar o gap do nav */
+  margin-right: 6px;
+}
+
+
+#clock {
+  font-size: 18px;
+  letter-spacing: 0.5px;
+  opacity: 0.9;
+  white-space: nowrap;
+}
+
 #signature {
-  position: fixed;
-  bottom: 8px;
-  right: 12px;
   font-size: 11px;
-  letter-spacing: 0.3px;
-  padding: 6px 10px;
-  background: rgba(15, 19, 26, 0.75);
-  backdrop-filter: blur(6px);
-  border-radius: 6px;
-  z-index: 9999;
+  opacity: 0.6;
+  margin-top: 2px;
 }
 
 #signature a {
   color: #e6e6e6;
   text-decoration: none;
-  opacity: 0.85;
 }
 
 #signature a:hover {
   text-decoration: underline;
-  opacity: 1;
+  opacity: 0.9;
 }
 
 
@@ -245,7 +267,8 @@ iframe {
     height: 50vh;
   }
 
-    .news,
+  .news1,
+  .news2,
   .tech1,
   .tech2,
   .tech3 {
@@ -264,6 +287,12 @@ iframe {
     button {
     min-height: 44px;
   }
+
+  #clock-container {
+    align-items: center;
+    text-align: center;
+    margin-right: 0;
+  }
 }
 
 
@@ -278,17 +307,26 @@ iframe {
   <button onclick="showPage('tech1')" id="btn-tech1">Tech1</button>
   <button onclick="showPage('tech2')" id="btn-tech2">Tech2</button>
   <button onclick="showPage('tech3')" id="btn-tech2">Tech3</button>
-  <button onclick="showPage('news')" id="btn-news">Notícias</button>
+  <button onclick="showPage('news1')" id="btn-news1">News1</button>
+  <button onclick="showPage('news2')" id="btn-news2">News2</button>
   <button onclick="showPage('settings')" id="btn-settings">Settings</button>
 
+  <div id="clock-container">
   <div id="clock"></div>
+  <div id="signature">
+    <a href="https://guilhermemartins.net" target="_blank" rel="noopener">
+      Daily Dashboard 2025 - guilhermemartins.net
+    </a>
+  </div>
+</div>
+
 
 </nav>
 
 <!-- PÁGINA 1 — TEMPO -->
 <div id="weather" class="page active">
   <iframe
-    src="https://embed.windy.com/embed2.html?lat=38.7223&lon=-9.1393&zoom=7&overlay=rain&product=ecmwf&metricTemp=%C2%B0C"
+    src="https://embed.windy.com/embed2.html?lat=38.7223&lon=-9.1393&zoom=7&overlay=clouds&product=ecmwf&metricTemp=%C2%B0C"
     loading="lazy">
   </iframe>
 </div>
@@ -422,14 +460,14 @@ iframe {
     <div class="newsPanel">
       <h3>MIT</h3>
       <script src="https://rss.bloople.net/?url=https%3A%2F%2Fwww.technologyreview.com%2Ffeed%2F&limit=20&detail=200&type=js"></script>
-  </div>
+    </div>
 
   </div>
 </div>
 
-<!-- PÁGINA 6 — NOTÍCIAS -->
-<div id="news" class="page">
-  <div class="news">
+<!-- PÁGINA 6 — News 1 -->
+<div id="news1" class="page">
+  <div class="news1">
 
     <!-- BBC -->
     <div class="newsPanel">
@@ -437,13 +475,38 @@ iframe {
       <script src="https://rss.bloople.net/?url=https%3A%2F%2Ffeeds.bbci.co.uk%2Fnews%2Fworld%2Frss.xml&limit=20&detail=200&type=js"></script>
     </div>
 
-    <div class="newsPanel">
-      <h3>RTP</h3>
-      <script src="https://rss.bloople.net/?url=https%3A%2F%2Fwww.rtp.pt%2Fnoticias%2Frss&limit=20&detail=200&type=js"></script>
-  </div>
+ <div class="newsPanel">
+  <h3>Al Jazeera</h3>
+  <script src="https://rss.bloople.net/?url=https%3A%2F%2Fwww.aljazeera.com%2Fxml%2Frss%2Fall.xml&limit=20&detail=200&type=js"></script>
+</div>
+
+
+
+
 
   </div>
 </div>
+
+<!-- PÁGINA 7 — News 2 -->
+<div id="news2" class="page">
+  <div class="news2">
+
+    <!-- Observador -->
+    <div class="newsPanel">
+      <h3>Observador</h3>
+      <script src="https://rss.bloople.net/?url=https%3A%2F%2Fobservador.pt%2Ffeed%2F&limit=20&type=js"></script>
+
+    </div>
+
+    <!-- RTP -->
+    <div class="newsPanel">
+      <h3>RTP</h3>
+      <script src="https://rss.bloople.net/?url=https%3A%2F%2Fwww.rtp.pt%2Fnoticias%2Frss&limit=20&detail=200&type=js"></script>
+    </div>
+
+  </div>
+</div>
+
 
 <!-- PÁGINA 4 — SETTINGS -->
 <div id="settings" class="page">
@@ -633,9 +696,7 @@ setInterval(updateClock, 1000);
 
 </script>
 
-<div id="signature">
-  Daily Dashboard 2025 · by <a href="http://guilhermemartins.net" target="_blank" rel="noopener"> Guilherme Martins </a>
-</div>
+
 
 
 </body>
